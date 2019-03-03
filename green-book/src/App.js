@@ -77,7 +77,7 @@ class App extends Component {
               <p>{JSON.stringify(this.state, 2, null)}</p>
             </Form>
 
-            <Progress value="463" max={500} />
+            <Progress value={this.state.time} max={this.state.end} />
           </Col>
         </Row>
       </Container>
