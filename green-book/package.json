@@ -8,8 +8,8 @@
     "react": "^16.8.3",
     "react-analog-clock": "^2.1.0",
     "react-dom": "^16.8.3",
-    "react-player": "^1.9.3",
     "react-scripts": "2.1.5",
+    "react-sound": "^1.2.0",
     "reactstrap": "^7.1.0"
   },
   "scripts": {
