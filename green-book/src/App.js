@@ -133,7 +133,7 @@ class App extends Component {
                 </ButtonGroup>
               </FormGroup>
             </Form>
-            <Progress color="secondary" style={{ height: '30px' }} value={this.state.progress} max={this.state.end}>
+            <Progress color="secondary" style={{ height: '40px' }} value={this.state.progress} max={this.state.end}>
               <span className="pl-2">{_.round((this.state.end - this.state.progress) / 1000)} s</span>
             </Progress>
           </Col>
