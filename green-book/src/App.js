@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Col, Container, Form, Input, Progress, Row } from 
 import React, { Component } from 'react'
 
 import SoundEffect from './SoundEffect'
+import moment from 'moment'
 
 class App extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class App extends Component {
       last3s: false,
       minute: '',
       message: 'Count',
+      progress: 0,
     }
 
     this.startTimer = this.startTimer.bind(this)
@@ -34,6 +36,7 @@ class App extends Component {
       const time = Date.now() - this.state.start
       this.setState({
         time,
+        progress: time,
       })
       if (time > this.state.end - 7500) {
         this.setState({ isOn: false, last3s: true })
@@ -42,7 +45,7 @@ class App extends Component {
         this.setState({ isOn: false, last3s: false, time: 0 })
         clearInterval(this.timer)
       }
-    }, 1)
+    }, 500)
   }
 
   stopTimer() {
@@ -76,8 +79,9 @@ class App extends Component {
               </ButtonGroup>
               <p>{JSON.stringify(this.state, 2, null)}</p>
             </Form>
-
-            <Progress value={this.state.time} max={this.state.end} />
+            <Progress value={this.state.progress} max={this.state.end}>
+              {this.state.end - this.state.progress}
+            </Progress>
           </Col>
         </Row>
       </Container>
