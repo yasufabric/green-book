@@ -80,14 +80,21 @@ class App extends Component {
             <Form>
               {this.state.last3s && <SoundEffect type="3s" />}
               {this.state.end - this.state.remind < this.state.time && <SoundEffect type="jazz" />}
-              <h3>
-                <img height="40px" src={require('./images/watch.jpg')} alt="honmono" /> Cartier Timer
-              </h3>
+              <div className="clearfix pb-2">
+                <div className="float-left">
+                  <h4>Cartier Timer</h4>
+                </div>
+                <div className="float-right">
+                  <img height="30px" src={require('./images/watch.jpg')} alt="honmono" />
+                </div>
+              </div>
               <FormGroup>
                 <ButtonGroup>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
-                      <InputGroupText>Timer</InputGroupText>
+                      <InputGroupText>
+                        <span class="lnr lnr-clock pr-2 pl-1" /> Timer
+                      </InputGroupText>
                     </InputGroupAddon>
                     <Input
                       placeholder="Please enter seconds"
@@ -106,7 +113,7 @@ class App extends Component {
                 <ButtonGroup>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
-                      <InputGroupText>Remind</InputGroupText>
+                      <InputGroupText>Remind at</InputGroupText>
                     </InputGroupAddon>
                     <Input
                       placeholder="Please enter seconds"
