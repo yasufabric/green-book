@@ -34,6 +34,7 @@ class App extends Component {
       })
     }, 1)
   }
+
   stopTimer() {
     this.setState({ isOn: false })
     clearInterval(this.timer)
@@ -51,10 +52,10 @@ class App extends Component {
               <Input bsSize="lg" value={this.state.minute} onChange={e => this.setState({ minute: e.target.value })} />
 
               <ButtonGroup>
-                {this.state.time === 0 && <Button onClick={this.startTimer}>Start</Button>}
-                {(this.state.time === 0 || !this.state.isOn) && <Button onClick={this.stopTimer}>Stop</Button>}
-                {(this.state.time === 0 || this.state.isOn) && <Button onClick={this.startTimer}>Resume</Button>}
-                {(this.state.time === 0 || this.state.isOn) && <Button onClick={this.resetTimer}>Rest</Button>}
+                <Button onClick={this.startTimer}>Start</Button>
+                <Button onClick={this.stopTimer}>Stop</Button>
+                <Button onClick={this.startTimer}>Resume</Button>
+                <Button onClick={this.resetTimer}>Rest</Button>
               </ButtonGroup>
               <p>{JSON.stringify(this.state, 2, null)}</p>
             </Form>
