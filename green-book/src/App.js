@@ -1,7 +1,7 @@
 import './App.css'
 
 import AnalogClock, { Themes } from 'react-analog-clock'
-import { Button, Col, Container, Form, Input, Row } from 'reactstrap'
+import { Button, ButtonGroup, Col, Container, Form, Input, Row } from 'reactstrap'
 import React, { Component } from 'react'
 
 import moment from 'moment'
@@ -43,22 +43,20 @@ class App extends Component {
   }
 
   render() {
-    let stop = this.state.time === 0 || !this.state.isOn ? null : <button onClick={this.stopTimer}>stop</button>
-    let resume = this.state.time === 0 || this.state.isOn ? null : <button onClick={this.startTimer}>resume</button>
-    let reset = this.state.time === 0 || this.state.isOn ? null : <button onClick={this.resetTimer}>reset</button>
-
     return (
       <Container>
         <Row>
           <Col>
-            <p>{JSON.stringify(this.state, 2, null)}</p>
-            {this.state.time === 0 && <Button onClick={this.startTimer}>Start</Button>}
-
-            {resume}
-            {stop}
-            {reset}
             <Form>
               <Input bsSize="lg" value={this.state.minute} onChange={e => this.setState({ minute: e.target.value })} />
+
+              <ButtonGroup>
+                {this.state.time === 0 && <Button onClick={this.startTimer}>Start</Button>}
+                {(this.state.time === 0 || !this.state.isOn) && <Button onClick={this.stopTimer}>Stop</Button>}
+                {(this.state.time === 0 || this.state.isOn) && <Button onClick={this.startTimer}>Resume</Button>}
+                {(this.state.time === 0 || this.state.isOn) && <Button onClick={this.resetTimer}>Rest</Button>}
+              </ButtonGroup>
+              <p>{JSON.stringify(this.state, 2, null)}</p>
             </Form>
             <AnalogClock theme={Themes.dark} />
           </Col>
