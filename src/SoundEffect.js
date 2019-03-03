@@ -11,9 +11,9 @@ export default class SoundEffect extends Component {
     super()
     this.state = {
       types: {
-        '3s': require('./sounds/3.mp3'),
-        rain: require('./sounds/rain.mp3'),
-        jazz: require('./sounds/jazz.mp3'),
+        '3s': '/sounds/3.mp3',
+        rain: '/sounds/rain.mp3',
+        jazz: '/sounds/jazz.mp3',
       },
     }
   }
