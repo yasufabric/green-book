@@ -76,56 +76,49 @@ class App extends Component {
     return (
       <Container className="p-4">
         <Row>
-          <Col lg={4}>
+          <Col lg={12} md={12} sm={12}>
             <Form>
               {this.state.last3s && <SoundEffect type="3s" />}
               {this.state.end - this.state.remind < this.state.time && <SoundEffect type="jazz" />}
               <div className="clearfix pb-2">
                 <div className="float-left">
-                  <h4>Cartier Timer</h4>
-                </div>
-                <div className="float-right">
-                  <img height="30px" src={require('./images/watch.jpg')} alt="honmono" />
+                  <h4 className="text-white font-weight-bold">Cartier Timer</h4>
                 </div>
               </div>
               <FormGroup>
-                <ButtonGroup>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <span class="lnr lnr-clock pr-2 pl-1" /> Timer
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Please enter seconds"
-                      bsSize="lg"
-                      value={this.state.end / 1000}
-                      onChange={e => this.setState({ end: e.target.value * 1000 })}
-                    />
-                    <InputGroupAddon addonType="append">
-                      <InputGroupText>Sec</InputGroupText>
-                    </InputGroupAddon>
-                  </InputGroup>
-                </ButtonGroup>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <span class="lnr lnr-clock pr-2 pl-1" /> Timer
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    placeholder="Please enter seconds"
+                    bsSize="lg"
+                    value={this.state.end / 1000}
+                    onChange={e => this.setState({ end: e.target.value * 1000 })}
+                  />
+                  <InputGroupAddon addonType="append">
+                    <InputGroupText>Sec</InputGroupText>
+                  </InputGroupAddon>
+                </InputGroup>
               </FormGroup>
 
               <FormGroup>
-                <ButtonGroup>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>Remind at</InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Please enter seconds"
-                      bsSize="lg"
-                      value={this.state.remind / 1000}
-                      onChange={e => this.setState({ remind: e.target.value * 1000 })}
-                    />
-                    <InputGroupAddon addonType="append">
-                      <InputGroupText>Sec</InputGroupText>
-                    </InputGroupAddon>
-                  </InputGroup>
-                </ButtonGroup>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Remind at</InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    placeholder="Please enter seconds"
+                    bsSize="lg"
+                    value={this.state.remind / 1000}
+                    onChange={e => this.setState({ remind: e.target.value * 1000 })}
+                  />
+                  <InputGroupAddon addonType="append">
+                    <InputGroupText>Sec</InputGroupText>
+                  </InputGroupAddon>
+                </InputGroup>
               </FormGroup>
 
               <FormGroup>
