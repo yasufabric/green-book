@@ -76,7 +76,7 @@ class App extends Component {
     return (
       <Container className="p-4">
         <Row>
-          <Col lg={12}>
+          <Col lg={4}>
             <Form>
               {this.state.last3s && <SoundEffect type="3s" />}
               {this.state.end - this.state.remind < this.state.time && <SoundEffect type="jazz" />}
@@ -99,15 +99,11 @@ class App extends Component {
                       <InputGroupText>Sec</InputGroupText>
                     </InputGroupAddon>
                   </InputGroup>
+                </ButtonGroup>
+              </FormGroup>
 
-                  <Button onClick={this.startTimer}>Start</Button>
-                  <Button outline onClick={this.stopTimer}>
-                    Stop
-                  </Button>
-                  <Button outline onClick={this.resetTimer}>
-                    Reset
-                  </Button>
-
+              <FormGroup>
+                <ButtonGroup>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>Remind</InputGroupText>
@@ -124,9 +120,21 @@ class App extends Component {
                   </InputGroup>
                 </ButtonGroup>
               </FormGroup>
+
+              <FormGroup>
+                <ButtonGroup className="btn-block">
+                  <Button onClick={this.startTimer}>Start</Button>
+                  <Button outline onClick={this.stopTimer}>
+                    Stop
+                  </Button>
+                  <Button outline onClick={this.resetTimer}>
+                    Reset
+                  </Button>
+                </ButtonGroup>
+              </FormGroup>
             </Form>
-            <Progress color="secondary" value={this.state.progress} max={this.state.end}>
-              {_.round((this.state.end - this.state.progress) / 1000)} s
+            <Progress color="secondary" style={{ height: '30px' }} value={this.state.progress} max={this.state.end}>
+              <span className="pl-2">{_.round((this.state.end - this.state.progress) / 1000)} s</span>
             </Progress>
           </Col>
         </Row>
