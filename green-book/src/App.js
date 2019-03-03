@@ -43,7 +43,6 @@ class App extends Component {
   }
 
   render() {
-    let start = this.state.time === 0 ? <button onClick={this.startTimer}>start</button> : null
     let stop = this.state.time === 0 || !this.state.isOn ? null : <button onClick={this.stopTimer}>stop</button>
     let resume = this.state.time === 0 || this.state.isOn ? null : <button onClick={this.startTimer}>resume</button>
     let reset = this.state.time === 0 || this.state.isOn ? null : <button onClick={this.resetTimer}>reset</button>
@@ -52,23 +51,16 @@ class App extends Component {
       <Container>
         <Row>
           <Col>
-            <div className="App">
-              <AnalogClock theme={Themes.dark} />
-              <div style={{ width: 40, height: 40 }}>{this.state.minute}</div>
-              <div style={{ width: 40, height: 40 }}>{this.state.message}</div>
-              <h3>timer: {this.state.time}</h3>
-              {start}
-              {resume}
-              {stop}
-              {reset}
-              <Form>
-                <Input
-                  bsSize="lg"
-                  value={this.state.minute}
-                  onChange={e => this.setState({ minute: e.target.value })}
-                />
-              </Form>
-            </div>
+            <p>{JSON.stringify(this.state, 2, null)}</p>
+            {this.state.time === 0 && <Button onClick={this.startTimer}>Start</Button>}
+
+            {resume}
+            {stop}
+            {reset}
+            <Form>
+              <Input bsSize="lg" value={this.state.minute} onChange={e => this.setState({ minute: e.target.value })} />
+            </Form>
+            <AnalogClock theme={Themes.dark} />
           </Col>
         </Row>
       </Container>
