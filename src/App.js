@@ -11,7 +11,6 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Label,
   Progress,
   Row,
 } from 'reactstrap'
@@ -53,7 +52,7 @@ class App extends Component {
         time,
         progress: time,
       })
-      if (time > this.state.end - 7500) {
+      if (time > this.state.end - 7000) {
         this.setState({ isOn: false, last3s: true })
       }
       if (time > this.state.end) {
@@ -79,7 +78,9 @@ class App extends Component {
           <Col lg={12} md={12} sm={12}>
             <Form>
               {this.state.last3s && <SoundEffect type="3s" />}
-              {this.state.end - this.state.remind < this.state.time && <SoundEffect type="jazz" />}
+              {!this.state.last3s && this.state.isOn && this.state.end - this.state.remind < this.state.time && (
+                <SoundEffect type="jazz" />
+              )}
               <div className="clearfix pb-2">
                 <div className="float-left">
                   <h4 className="text-white font-weight-bold">Cartier Timer</h4>
@@ -96,8 +97,8 @@ class App extends Component {
                   <Input
                     placeholder="Please enter seconds"
                     bsSize="lg"
-                    value={this.state.end / 1000}
-                    onChange={e => this.setState({ end: e.target.value * 1000 })}
+                    value={_.round(this.state.end / 1000)}
+                    onChange={e => this.setState({ end: _.round(e.target.value * 1000), time: 0, isOn: false })}
                   />
                   <InputGroupAddon addonType="append">
                     <InputGroupText>Sec</InputGroupText>
