@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Col, Container, Form, Input, Progress, Row } from 
 import React, { Component } from 'react'
 
 import SoundEffect from './SoundEffect'
-import moment from 'moment'
+import _ from 'lodash'
 
 class App extends Component {
   constructor() {
@@ -45,15 +45,16 @@ class App extends Component {
         this.setState({ isOn: false, last3s: false, time: 0 })
         clearInterval(this.timer)
       }
-    }, 500)
+    }, 1000)
   }
 
   stopTimer() {
-    this.setState({ isOn: false })
+    this.setState({ isOn: false, last3s: false })
     clearInterval(this.timer)
   }
   resetTimer() {
-    this.setState({ time: 0, isOn: false })
+    this.setState({ time: 0, isOn: false, last3s: false, progress: 0 })
+    clearInterval(this.timer)
   }
 
   render() {
@@ -80,7 +81,7 @@ class App extends Component {
               <p>{JSON.stringify(this.state, 2, null)}</p>
             </Form>
             <Progress value={this.state.progress} max={this.state.end}>
-              {this.state.end - this.state.progress}
+              {_.round((this.state.end - this.state.progress) / 1000)} s
             </Progress>
           </Col>
         </Row>
