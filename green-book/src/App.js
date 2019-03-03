@@ -1,6 +1,20 @@
 import './App.css'
 
-import { Button, ButtonGroup, Col, Container, Form, Input, Progress, Row } from 'reactstrap'
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Label,
+  Progress,
+  Row,
+} from 'reactstrap'
 import React, { Component } from 'react'
 
 import SoundEffect from './SoundEffect'
@@ -13,11 +27,12 @@ class App extends Component {
       time: 0,
       isOn: false,
       start: 0,
-      end: 10000,
+      end: 15000,
       last3s: false,
       minute: '',
       message: 'Count',
       progress: 0,
+      remind: 10000,
     }
 
     this.startTimer = this.startTimer.bind(this)
@@ -59,26 +74,57 @@ class App extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="p-4">
         <Row>
-          <Col>
+          <Col lg={12}>
             <Form>
               {this.state.last3s && <SoundEffect type="3s" />}
-              <div className="control">
-                <label>Seconds</label>
-              </div>
-              <ButtonGroup>
-                <Input
-                  bsSize="lg"
-                  value={this.state.end / 1000}
-                  onChange={e => this.setState({ end: e.target.value * 1000 })}
-                />
-                <Button onClick={this.startTimer}>Start</Button>
-                <Button onClick={this.stopTimer}>Stop</Button>
-                <Button onClick={this.startTimer}>Resume</Button>
-                <Button onClick={this.resetTimer}>Rest</Button>
-              </ButtonGroup>
-              <p>{JSON.stringify(this.state, 2, null)}</p>
+              {this.state.end - this.state.remind < this.state.time && <SoundEffect type="jazz" />}
+              <h3>Cartier Timer</h3>
+              <FormGroup>
+                <ButtonGroup>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>Timer</InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Please enter seconds"
+                      bsSize="lg"
+                      value={this.state.end / 1000}
+                      onChange={e => this.setState({ end: e.target.value * 1000 })}
+                    />
+                    <InputGroupAddon addonType="append">
+                      <InputGroupText>Sec</InputGroupText>
+                    </InputGroupAddon>
+                  </InputGroup>
+
+                  <Button color="primary" onClick={this.startTimer}>
+                    Start
+                  </Button>
+                  <Button color="danger" onClick={this.stopTimer}>
+                    Stop
+                  </Button>
+                  <Button onClick={this.startTimer}>Resume</Button>
+                  <Button color="warning" onClick={this.resetTimer}>
+                    Rest
+                  </Button>
+
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>Remind</InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Please enter seconds"
+                      bsSize="lg"
+                      value={this.state.remind / 1000}
+                      onChange={e => this.setState({ remind: e.target.value * 1000 })}
+                    />
+                    <InputGroupAddon addonType="append">
+                      <InputGroupText>Sec</InputGroupText>
+                    </InputGroupAddon>
+                  </InputGroup>
+                </ButtonGroup>
+              </FormGroup>
             </Form>
             <Progress value={this.state.progress} max={this.state.end}>
               {_.round((this.state.end - this.state.progress) / 1000)} s

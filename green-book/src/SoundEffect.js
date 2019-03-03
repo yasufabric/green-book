@@ -13,6 +13,7 @@ export default class SoundEffect extends Component {
       types: {
         '3s': require('./sounds/3.mp3'),
         rain: require('./sounds/rain.mp3'),
+        jazz: require('./sounds/jazz.mp3'),
       },
     }
   }
