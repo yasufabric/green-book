@@ -80,7 +80,9 @@ class App extends Component {
             <Form>
               {this.state.last3s && <SoundEffect type="3s" />}
               {this.state.end - this.state.remind < this.state.time && <SoundEffect type="jazz" />}
-              <h3>Cartier Timer</h3>
+              <h3>
+                <img height="40px" src={require('./images/watch.jpg')} alt="honmono" /> Cartier Timer
+              </h3>
               <FormGroup>
                 <ButtonGroup>
                   <InputGroup>
@@ -98,15 +100,12 @@ class App extends Component {
                     </InputGroupAddon>
                   </InputGroup>
 
-                  <Button color="primary" onClick={this.startTimer}>
-                    Start
-                  </Button>
-                  <Button color="danger" onClick={this.stopTimer}>
+                  <Button onClick={this.startTimer}>Start</Button>
+                  <Button outline onClick={this.stopTimer}>
                     Stop
                   </Button>
-                  <Button onClick={this.startTimer}>Resume</Button>
-                  <Button color="warning" onClick={this.resetTimer}>
-                    Rest
+                  <Button outline onClick={this.resetTimer}>
+                    Reset
                   </Button>
 
                   <InputGroup>
@@ -126,10 +125,9 @@ class App extends Component {
                 </ButtonGroup>
               </FormGroup>
             </Form>
-            <Progress value={this.state.progress} max={this.state.end}>
+            <Progress color="secondary" value={this.state.progress} max={this.state.end}>
               {_.round((this.state.end - this.state.progress) / 1000)} s
             </Progress>
-            <img src={require('./images/watch.jpg')} alt="honmono" />
           </Col>
         </Row>
       </Container>
