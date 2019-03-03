@@ -14,7 +14,8 @@ class App extends Component {
       time: 0,
       isOn: false,
       start: 0,
-      end: 3000,
+      end: 10000,
+      last3s: false,
       minute: '',
       message: 'Count',
     }
@@ -33,13 +34,16 @@ class App extends Component {
 
     this.timer = setInterval(() => {
       const time = Date.now() - this.state.start
-      if (time > this.state.end) {
-        this.setState({ isOn: false })
-        return <SoundEffect type="3s" />
-      }
       this.setState({
         time,
       })
+      if (time > this.state.end - 8000) {
+        this.setState({ isOn: false, last3s: true })
+      }
+      if (time > this.state.end) {
+        this.setState({ isOn: false, last3s: false, time: 0 })
+        clearInterval(this.timer)
+      }
     }, 1)
   }
 
@@ -57,15 +61,17 @@ class App extends Component {
         <Row>
           <Col>
             <Form>
+              {this.state.last3s && <SoundEffect type="3s" />}
               <div className="control">
                 <label>Seconds</label>
-                <Input
-                  bsSize="lg"
-                  value={this.state.minute}
-                  onChange={e => this.setState({ minute: e.target.value })}
-                />
               </div>
               <ButtonGroup>
+                <Input
+                  bsSize="lg"
+                  width="50px"
+                  value={this.state.end / 1000}
+                  onChange={e => this.setState({ end: e.target.value * 1000 })}
+                />
                 <Button onClick={this.startTimer}>Start</Button>
                 <Button onClick={this.stopTimer}>Stop</Button>
                 <Button onClick={this.startTimer}>Resume</Button>
