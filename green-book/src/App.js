@@ -1,11 +1,9 @@
 import './App.css'
 
-import AnalogClock, { Themes } from 'react-analog-clock'
-import { Button, ButtonGroup, Col, Container, Form, Input, Row } from 'reactstrap'
+import { Button, ButtonGroup, Col, Container, Form, Input, Progress, Row } from 'reactstrap'
 import React, { Component } from 'react'
 
 import SoundEffect from './SoundEffect'
-import moment from 'moment'
 
 class App extends Component {
   constructor() {
@@ -37,7 +35,7 @@ class App extends Component {
       this.setState({
         time,
       })
-      if (time > this.state.end - 8000) {
+      if (time > this.state.end - 7500) {
         this.setState({ isOn: false, last3s: true })
       }
       if (time > this.state.end) {
@@ -68,7 +66,6 @@ class App extends Component {
               <ButtonGroup>
                 <Input
                   bsSize="lg"
-                  width="50px"
                   value={this.state.end / 1000}
                   onChange={e => this.setState({ end: e.target.value * 1000 })}
                 />
@@ -79,7 +76,8 @@ class App extends Component {
               </ButtonGroup>
               <p>{JSON.stringify(this.state, 2, null)}</p>
             </Form>
-            <AnalogClock theme={Themes.dark} />
+
+            <Progress value="463" max={500} />
           </Col>
         </Row>
       </Container>
