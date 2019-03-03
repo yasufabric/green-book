@@ -4,6 +4,7 @@ import AnalogClock, { Themes } from 'react-analog-clock'
 import { Button, ButtonGroup, Col, Container, Form, Input, Row } from 'reactstrap'
 import React, { Component } from 'react'
 
+import SoundEffect from './SoundEffect'
 import moment from 'moment'
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
       time: 0,
       isOn: false,
       start: 0,
+      end: 3000,
       minute: '',
       message: 'Count',
     }
@@ -28,9 +30,15 @@ class App extends Component {
       time: this.state.time,
       start: Date.now() - this.state.time,
     })
+
     this.timer = setInterval(() => {
+      const time = Date.now() - this.state.start
+      if (time > this.state.end) {
+        this.setState({ isOn: false })
+        return <SoundEffect type="3s" />
+      }
       this.setState({
-        time: Date.now() - this.state.start,
+        time,
       })
     }, 1)
   }
@@ -49,8 +57,14 @@ class App extends Component {
         <Row>
           <Col>
             <Form>
-              <Input bsSize="lg" value={this.state.minute} onChange={e => this.setState({ minute: e.target.value })} />
-
+              <div className="control">
+                <label>Seconds</label>
+                <Input
+                  bsSize="lg"
+                  value={this.state.minute}
+                  onChange={e => this.setState({ minute: e.target.value })}
+                />
+              </div>
               <ButtonGroup>
                 <Button onClick={this.startTimer}>Start</Button>
                 <Button onClick={this.stopTimer}>Stop</Button>
