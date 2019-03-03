@@ -85,6 +85,7 @@ class App extends Component {
                   <h4 className="text-white font-weight-bold">Cartier Timer</h4>
                 </div>
               </div>
+
               <FormGroup>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
@@ -121,7 +122,7 @@ class App extends Component {
                 </InputGroup>
               </FormGroup>
 
-              <FormGroup>
+              <FormGroup className="pb-3">
                 <ButtonGroup className="btn-block">
                   <Button onClick={this.startTimer}>Start</Button>
                   <Button outline onClick={this.stopTimer}>
@@ -132,10 +133,13 @@ class App extends Component {
                   </Button>
                 </ButtonGroup>
               </FormGroup>
+
+              {(this.state.isOn || this.state.progress !== 0) && (
+                <Progress color="secondary" style={{ height: '40px' }} value={this.state.progress} max={this.state.end}>
+                  <span className="pl-2">{_.round((this.state.end - this.state.progress) / 1000)} s</span>
+                </Progress>
+              )}
             </Form>
-            <Progress color="secondary" style={{ height: '40px' }} value={this.state.progress} max={this.state.end}>
-              <span className="pl-2">{_.round((this.state.end - this.state.progress) / 1000)} s</span>
-            </Progress>
           </Col>
         </Row>
       </Container>
