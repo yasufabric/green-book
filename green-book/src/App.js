@@ -129,6 +129,7 @@ class App extends Component {
             <Progress value={this.state.progress} max={this.state.end}>
               {_.round((this.state.end - this.state.progress) / 1000)} s
             </Progress>
+            <img src={require('./images/watch.jpg')} alt="honmono" />
           </Col>
         </Row>
       </Container>
