@@ -1,3 +1,5 @@
+sample app: You can visit https://my-react-app-gysrbdsn0.now.sh/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
